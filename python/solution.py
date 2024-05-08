@@ -1,12 +1,15 @@
 from typing import List
 from string import ascii_uppercase
 
-def _generate_playfair_grid(keyword: str) -> List[List[str]]:
+def _generate_playfair_grid(keyword: str,
+                            replace_j: bool = True) -> List[List[str]]:
     """ Generates a character grid for a Playfair encryption/decryption.
 
     Args:
         keyword (str): A keyword that represents the first few unique
         characters of a Playfair grid.
+        replace_j (bool): If True, generate a Playfair grid where instances of
+        "J" are replaced with "I"s.
 
     Returns:
         List[List[str]]: A 2D list of uppercase characters, initially
@@ -21,7 +24,10 @@ def _generate_playfair_grid(keyword: str) -> List[List[str]]:
 
         playfair_row.append(char)
 
-    characters = list(ascii_uppercase.replace("J", "I"))
+    if replace_j:
+        characters = list(ascii_uppercase.replace("J", "I"))
+    else:
+        characters = list(ascii_uppercase)
 
     for character in characters:
         if character in playfair_row:
