@@ -72,14 +72,11 @@ def _generate_bigrams(message: str) -> List[str]:
         List[str]: A list of two character bigrams. Note that repeated
         characters have an "X" inserted in between.
     """
-    for i in range(len(message)-1):
-        if message[i] == message[i+1]:
-            message = message[0:i+1] + "X" + message[i+1::]
-
-    if len(message) % 2 != 0:
-        message += "X"
-
     bigrams = [message[i: i+2] for i in range(0, len(message), 2)]
+
+    for i, bigram in enumerate(bigrams):
+        if len(set(bigram)) == 1:
+            bigrams[i] = bigrams[0] + "X"
 
     return bigrams
 
