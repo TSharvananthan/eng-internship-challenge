@@ -123,7 +123,9 @@ def decrypt_playfair_cipher(encrypted_message: str, keyword: str) -> str:
 
     return decrypted_message
 
-encrypted_message = "IKEWENENXLNQLPZSLERUMRHEERYBOFNEINCHCV"
-key = "SUPERSPY"
-playfair_grid = _generate_playfair_grid(encrypted_message)
-print(decrypt_playfair_cipher(encrypted_message, key))
+if __name__ == "__main__":
+    encrypted_message = "IKEWENENXLNQLPZSLERUMRHEERYBOFNEINCHCV"
+    key = "SUPERSPY"
+    playfair_grid = _generate_playfair_grid(encrypted_message)
+    decrypted_message = decrypt_playfair_cipher(encrypted_message, key)
+    print(decrypted_message)
