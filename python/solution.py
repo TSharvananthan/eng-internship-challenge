@@ -55,7 +55,7 @@ def _generate_position_map(lst: list) -> Dict[str, tuple]:
     """
     position_map = {}
 
-    for i, rows in enumerate(playfair_grid):
+    for i, rows in enumerate(lst):
         for j, value in enumerate(rows):
             position_map[value] = (i, j)
 
