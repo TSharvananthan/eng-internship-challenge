@@ -119,13 +119,14 @@ def decrypt_playfair_cipher(encrypted_message: str, keyword: str) -> str:
         decrypted_bigram = first_char_decrypt + second_char_decrypt
         decrypted_bigrams.append(decrypted_bigram)
 
-        decrypted_message = "".join(decrypted_bigrams)
+        decrypted_message = "" \
+            .join(decrypted_bigrams) \
+            .replace("X", "")
 
     return decrypted_message
 
 if __name__ == "__main__":
     encrypted_message = "IKEWENENXLNQLPZSLERUMRHEERYBOFNEINCHCV"
     key = "SUPERSPY"
-    playfair_grid = _generate_playfair_grid(encrypted_message)
     decrypted_message = decrypt_playfair_cipher(encrypted_message, key)
     print(decrypted_message)
