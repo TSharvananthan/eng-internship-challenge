@@ -99,22 +99,22 @@ def decrypt_playfair_cipher(encrypted_message: str, keyword: str) -> str:
     decrypted_bigrams = []
 
     for encrypted_bigram in encrypted_bigrams:
-        first_char, second_char = encrypted_bigram
+        c1, c2 = encrypted_bigram
 
-        first_char_row, first_char_col = position_map[first_char]
-        second_char_row, second_char_col = position_map[second_char]
+        c1_row, c1_col = position_map[c1]
+        c2_row, c2_col = position_map[c2]
 
-        if first_char_row == second_char_row:
-            first_char_decrypt = playfair_grid[first_char_row][(first_char_col - 1) % 5]
-            second_char_decrypt = playfair_grid[second_char_row][(second_char_col - 1) % 5]
+        if c1_row == c2_row:
+            first_char_decrypt = playfair_grid[c1_row][(c1_col - 1) % 5]
+            second_char_decrypt = playfair_grid[c2_row][(c2_col - 1) % 5]
 
-        elif first_char_col == second_char_col:
-            first_char_decrypt = playfair_grid[(first_char_row - 1) % 5][first_char_col]
-            second_char_decrypt = playfair_grid[(second_char_row - 1) % 5][second_char_col]
+        elif c1_col == c2_col:
+            first_char_decrypt = playfair_grid[(c1_row - 1) % 5][c1_col]
+            second_char_decrypt = playfair_grid[(c2_row - 1) % 5][c2_col]
         
         else:
-            first_char_decrypt = playfair_grid[first_char_row][second_char_col]
-            second_char_decrypt = playfair_grid[second_char_row][first_char_col]
+            first_char_decrypt = playfair_grid[c1_row][c2_col]
+            second_char_decrypt = playfair_grid[c2_row][c1_col]
 
         decrypted_bigram = first_char_decrypt + second_char_decrypt
         decrypted_bigrams.append(decrypted_bigram)
