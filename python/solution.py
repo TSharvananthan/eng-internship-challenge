@@ -104,15 +104,19 @@ def decrypt_playfair_cipher(encrypted_message: str, keyword: str) -> str:
         c1_row, c1_col = position_map[c1]
         c2_row, c2_col = position_map[c2]
 
-        if c1_row == c2_row:
+        APPLY_ROW_RULE = c1_row == c2_row
+        APPLY_COLUMN_RULE = c1_col == c2_col
+        APPLY_RECTANGLE_RULE = not APPLY_ROW_RULE and not APPLY_COLUMN_RULE
+
+        if APPLY_ROW_RULE:
             first_char_decrypt = playfair_grid[c1_row][(c1_col - 1) % 5]
             second_char_decrypt = playfair_grid[c2_row][(c2_col - 1) % 5]
 
-        elif c1_col == c2_col:
+        elif APPLY_COLUMN_RULE:
             first_char_decrypt = playfair_grid[(c1_row - 1) % 5][c1_col]
             second_char_decrypt = playfair_grid[(c2_row - 1) % 5][c2_col]
         
-        else:
+        elif APPLY_RECTANGLE_RULE:
             first_char_decrypt = playfair_grid[c1_row][c2_col]
             second_char_decrypt = playfair_grid[c2_row][c1_col]
 
